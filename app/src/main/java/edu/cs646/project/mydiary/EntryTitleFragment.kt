@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 
 class EntryTitleFragment : Fragment() {
@@ -14,6 +15,7 @@ class EntryTitleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val rootView = inflater.inflate(R.layout.fragment_entry_title, container, false)
+
 
         // Click listener for the RecyclerView
         val onClickListener = View.OnClickListener { itemView: View ->
@@ -31,6 +33,8 @@ class EntryTitleFragment : Fragment() {
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.band_list)
         val bands = EntryRepo.getInstance(requireContext()).bandList
         recyclerView.adapter = BandAdapter(bands, onClickListener)
+        val divider = DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL)
+        recyclerView.addItemDecoration(divider)
 
         return rootView
     }
